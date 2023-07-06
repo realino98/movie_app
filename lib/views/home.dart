@@ -4,7 +4,7 @@ import 'package:movie_app/views/pages/favoritepage.dart';
 import 'package:movie_app/views/pages/homepage.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  Home({super.key});
 
   @override
   State<Home> createState() => _HomeState();
@@ -17,7 +17,7 @@ class _HomeState extends State<Home> {
   String backgroundPicture = "assets/images/profile_background.jpg";
   int selectedIndex = 0;
 
-  List<Widget> views = const [
+  List<Widget> views = [
     HomePage(),
     ExplorePage(),
     FavoritePage(),
@@ -124,14 +124,7 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
-      body: Row(
-        children: [
-          Expanded(
-            flex: 5,
-            child: views.elementAt(selectedIndex),
-          ),
-        ],
-      ),
+      body: views.elementAt(selectedIndex),
     );
   }
 }
