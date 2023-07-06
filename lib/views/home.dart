@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:side_navigation/side_navigation.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class Home extends StatefulWidget {
+  const Home({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<Home> createState() => _HomeState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomeState extends State<Home> {
   int selectedIndex = 0;
 
   List<Widget> views = const [
     Center(
-      child: Text('Dashboard'),
+      child: Text('Home'),
     ),
     Center(
-      child: Text('Account'),
+      child: Text('Explore'),
     ),
     Center(
-      child: Text('Settings'),
+      child: Text('Favorite'),
     ),
   ];
 
@@ -66,32 +66,49 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Row(
         children: [
-          /// Pretty similar to the BottomNavigationBar!
-          SideNavigationBar(
-            selectedIndex: selectedIndex,
-            items: const [
-              SideNavigationBarItem(
-                icon: Icons.dashboard,
-                label: 'Dashboard',
-              ),
-              SideNavigationBarItem(
-                icon: Icons.person,
-                label: 'Account',
-              ),
-              SideNavigationBarItem(
-                icon: Icons.settings,
-                label: 'Settings',
-              ),
-            ],
-            onTap: (index) {
-              setState(() {
-                selectedIndex = index;
-              });
-            },
-          ),
-
-          /// Make it take the rest of the available width
           Expanded(
+            flex: 1,
+            child: Container(
+              color: Colors.grey[100],
+              //Buttons
+              child: ListView(
+                children: [
+                  ListTile(
+                    trailing: Icon(Icons.arrow_left),
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.dashboard),
+                    title: Text("Dashboard"),
+                    onTap: () {
+                      setState(() {
+                        selectedIndex = 0;
+                      });
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.explore),
+                    title: Text("Explore"),
+                    onTap: () {
+                      setState(() {
+                        selectedIndex = 1;
+                      });
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.favorite),
+                    title: Text("Favorite"),
+                    onTap: () {
+                      setState(() {
+                        selectedIndex = 2;
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 5,
             child: views.elementAt(selectedIndex),
           ),
         ],
