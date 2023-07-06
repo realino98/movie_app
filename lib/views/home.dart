@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:side_navigation/side_navigation.dart';
+import 'package:movie_app/views/pages/explorepage.dart';
+import 'package:movie_app/views/pages/favoritepage.dart';
+import 'package:movie_app/views/pages/homepage.dart';
+import 'package:movie_app/views/util/drawer.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -12,20 +15,15 @@ class _HomeState extends State<Home> {
   int selectedIndex = 0;
 
   List<Widget> views = const [
-    Center(
-      child: Text('Home'),
-    ),
-    Center(
-      child: Text('Explore'),
-    ),
-    Center(
-      child: Text('Favorite'),
-    ),
+    HomePage(),
+    ExplorePage(),
+    FavoritePage(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: SideDrawer(),
       appBar: AppBar(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -67,49 +65,8 @@ class _HomeState extends State<Home> {
       body: Row(
         children: [
           Expanded(
-            flex: 1,
-            child: Container(
-              color: Colors.grey[100],
-              //Buttons
-              child: ListView(
-                children: [
-                  ListTile(
-                    trailing: Icon(Icons.arrow_left),
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.dashboard),
-                    title: Text("Dashboard"),
-                    onTap: () {
-                      setState(() {
-                        selectedIndex = 0;
-                      });
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.explore),
-                    title: Text("Explore"),
-                    onTap: () {
-                      setState(() {
-                        selectedIndex = 1;
-                      });
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.favorite),
-                    title: Text("Favorite"),
-                    onTap: () {
-                      setState(() {
-                        selectedIndex = 2;
-                      });
-                    },
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Expanded(
             flex: 5,
-            child: views.elementAt(selectedIndex),
+            child: views[selectedIndex],
           ),
         ],
       ),
