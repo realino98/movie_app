@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/views/pages/explorepage.dart';
 import 'package:movie_app/views/pages/favoritepage.dart';
 import 'package:movie_app/views/pages/homepage.dart';
-import 'package:movie_app/views/util/drawer.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -12,6 +11,10 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  String accountName = "Bernard";
+  String accountEmail = "hello.world@gmail.com";
+  String accountPicture = "assets/images/profile_image.jpeg";
+  String backgroundPicture = "assets/images/profile_background.jpg";
   int selectedIndex = 0;
 
   List<Widget> views = const [
@@ -23,7 +26,60 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: SideDrawer(),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            UserAccountsDrawerHeader(
+              accountName: Text(accountName),
+              accountEmail: Text(accountEmail),
+              currentAccountPicture: CircleAvatar(
+                child: ClipOval(
+                  child: Image.asset(
+                    accountPicture,
+                    width: 90,
+                    height: 90,
+                  ),
+                ),
+              ),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(
+                    backgroundPicture,
+                  ),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.dashboard),
+              title: Text("Dashboard"),
+              onTap: () {
+                setState(() {
+                  selectedIndex = 0;
+                });
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.explore),
+              title: Text("Explore"),
+              onTap: () {
+                setState(() {
+                  selectedIndex = 1;
+                });
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.favorite),
+              title: Text("Favorite"),
+              onTap: () {
+                setState(() {
+                  selectedIndex = 2;
+                });
+              },
+            ),
+          ],
+        ),
+      ),
       appBar: AppBar(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -41,8 +97,14 @@ class _HomeState extends State<Home> {
                 color: Colors.grey[300],
                 child: Row(
                   children: [
-                    Icon(Icons.search),
-                    Text("Search for videos"),
+                    Icon(
+                      Icons.search,
+                      color: Colors.grey[600],
+                    ),
+                    Text(
+                      "Search for videos",
+                      style: TextStyle(color: Colors.grey[600]),
+                    ),
                   ],
                 ),
               ),
@@ -66,7 +128,7 @@ class _HomeState extends State<Home> {
         children: [
           Expanded(
             flex: 5,
-            child: views[selectedIndex],
+            child: views.elementAt(selectedIndex),
           ),
         ],
       ),
