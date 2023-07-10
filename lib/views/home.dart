@@ -12,7 +12,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   String accountName = "Bernard";
-  String accountEmail = "hello.world@gmail.com";
+  String accountEmail = "bernard.realino98@gmail.com";
   String accountPicture = "assets/images/profile_image.jpeg";
   String backgroundPicture = "assets/images/profile_background.jpg";
   int selectedIndex = 0;

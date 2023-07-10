@@ -97,6 +97,7 @@ class _HomePageState extends State<HomePage> {
                 return Padding(
                   padding: EdgeInsets.all(5),
                   child: Thumbnail(
+                    current_movie_index: topratedmovies[index]['id'],
                     title: topratedmovies[index]['title'],
                     posterurl: 'https://image.tmdb.org/t/p/w500' +
                         topratedmovies[index]['poster_path'],

@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/views/pages/learnmorepage.dart';
 
 class Thumbnail extends StatelessWidget {
   const Thumbnail(
       {super.key,
+      required this.current_movie_index,
       required this.title,
       required this.overview,
       required this.posterurl});
   final String title, overview, posterurl;
+  final int current_movie_index;
+
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -16,12 +20,22 @@ class Thumbnail extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Expanded(
-                child: Image.network(
-                  posterurl,
-                  fit: BoxFit.cover,
+            InkWell(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) =>
+                        LearnMorePage(movie_info: current_movie_index),
+                  ),
+                );
+              },
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Expanded(
+                  child: Image.network(
+                    posterurl,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
