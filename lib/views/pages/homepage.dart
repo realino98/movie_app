@@ -47,27 +47,68 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      itemCount: 20,
-      padding: EdgeInsets.all(20),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 4,
-        childAspectRatio: 0.4,
-      ),
-      itemBuilder: (BuildContext context, int index) {
-        //Videos
-        // if (trendingmovies[index]['media_type'] != "tv") {
-        return Padding(
-          padding: EdgeInsets.all(5),
-          child: Thumbnail(
-            title: topratedmovies[index]['title'],
-            posterurl: 'https://image.tmdb.org/t/p/w500' +
-                topratedmovies[index]['poster_path'],
-            overview: topratedmovies[index]['overview'],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          Container(
+            padding: EdgeInsets.all(8),
+            height: 50,
+            child: Row(
+              children: [
+                OutlinedButton(
+                  onPressed: () {},
+                  child: Text("For You"),
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                OutlinedButton(
+                  onPressed: () {},
+                  child: Text("Music"),
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                OutlinedButton(
+                  onPressed: () {},
+                  child: Text("Gaming"),
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                OutlinedButton(
+                  onPressed: () {},
+                  child: Text("Technology"),
+                ),
+              ],
+            ),
           ),
-        );
-        // }
-      },
+          Expanded(
+            child: GridView.builder(
+              itemCount: 20,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 4,
+                childAspectRatio: 0.4,
+              ),
+              itemBuilder: (BuildContext context, int index) {
+                //Videos
+                // if (trendingmovies[index]['media_type'] != "tv") {
+                return Padding(
+                  padding: EdgeInsets.all(5),
+                  child: Thumbnail(
+                    title: topratedmovies[index]['title'],
+                    posterurl: 'https://image.tmdb.org/t/p/w500' +
+                        topratedmovies[index]['poster_path'],
+                    overview: topratedmovies[index]['overview'],
+                  ),
+                );
+                // }
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
