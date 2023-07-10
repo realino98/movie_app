@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage> {
               itemCount: 20,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 4,
-                childAspectRatio: 0.4,
+                childAspectRatio: 0.5,
               ),
               itemBuilder: (BuildContext context, int index) {
                 //Videos
