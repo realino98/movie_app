@@ -42,23 +42,29 @@ class _HomePageState extends State<HomePage> {
       topratedmovies = topratedresult['results'];
       tv = tvresult['results'];
     });
+    // print(topratedmovies);
   }
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
       itemCount: 20,
+      padding: EdgeInsets.all(20),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 5,
-        childAspectRatio: 0.5,
+        crossAxisCount: 4,
+        childAspectRatio: 0.4,
       ),
       itemBuilder: (BuildContext context, int index) {
         //Videos
         // if (trendingmovies[index]['media_type'] != "tv") {
-        return Thumbnail(
-          title: trendingmovies[index]['title'],
-          posterurl: 'https://image.tmdb.org/t/p/w500' +
-              trendingmovies[index]['poster_path'],
+        return Padding(
+          padding: EdgeInsets.all(5),
+          child: Thumbnail(
+            title: topratedmovies[index]['title'],
+            posterurl: 'https://image.tmdb.org/t/p/w500' +
+                topratedmovies[index]['poster_path'],
+            overview: topratedmovies[index]['overview'],
+          ),
         );
         // }
       },

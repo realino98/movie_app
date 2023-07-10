@@ -1,73 +1,68 @@
 import 'package:flutter/material.dart';
 
 class Thumbnail extends StatelessWidget {
-  const Thumbnail({super.key, required this.title, required this.posterurl});
-  final String title;
-  final String posterurl;
+  const Thumbnail(
+      {super.key,
+      required this.title,
+      required this.overview,
+      required this.posterurl});
+  final String title, overview, posterurl;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(4.0),
-      //Posts
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Image.network(posterurl),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    //Profile Picture
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.grey[300],
-                        ),
-                      ),
-                    ),
-                    Text(title),
-                  ],
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+      child: Container(
+        color: Colors.grey[200],
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Expanded(
+                child: Image.network(
+                  posterurl,
+                  fit: BoxFit.cover,
                 ),
-                Icon(Icons.more_vert),
-              ],
+              ),
             ),
-          ),
-          //Caption
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Container(
-                  height: 40,
-                  width: 40,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                title,
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  overview,
+                  style: TextStyle(
+                    fontSize: 16,
                   ),
                 ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
                 children: [
-                  Text("Username"),
-                  Row(
-                    children: [
-                      Text("Views"),
-                      Text("."),
-                      Text("Upload Date"),
-                    ],
-                  )
+                  Icon(Icons.star, color: Colors.yellow),
+                  SizedBox(width: 8),
+                  Text(
+                    '8.5',
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
                 ],
-              )
-            ],
-          ),
-        ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
