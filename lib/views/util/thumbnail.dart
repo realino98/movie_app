@@ -7,8 +7,9 @@ class Thumbnail extends StatefulWidget {
       required this.current_movie_index,
       required this.title,
       required this.overview,
-      required this.posterurl});
-  final String title, overview, posterurl;
+      required this.posterurl,
+      required this.backdrop});
+  final String title, overview, posterurl, backdrop;
   final int current_movie_index;
 
   @override
@@ -24,7 +25,7 @@ class _ThumbnailState extends State<Thumbnail> {
     return InkWell(
       onTap: () {},
       onHover: (value) {
-        print(value);
+        // print(value);
         if (value) {
           setState(() {
             elevation = 0;
@@ -59,7 +60,9 @@ class _ThumbnailState extends State<Thumbnail> {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (BuildContext context) => LearnMorePage(
-                                movie_info: widget.current_movie_index),
+                              movie_info: widget.current_movie_index,
+                              backdrop: widget.backdrop,
+                            ),
                           ),
                         );
                       },
