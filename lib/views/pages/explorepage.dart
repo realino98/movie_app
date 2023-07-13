@@ -21,7 +21,7 @@ class _ExplorePageState extends State<ExplorePage> {
 
   _initChannel() async {
     Channel channel = await APIService.instance
-        .fetchChannel(channelId: 'UC6Dy0rQ6zDnQuHQ1EeErGUA');
+        .fetchChannel(channelId: 'UChk1rCFhhnqPnDzcjIJKhTw');
     setState(() {
       _channel = channel;
     });
