@@ -103,20 +103,59 @@ class _ExplorePageState extends State<ExplorePage> {
             ),
           ],
         ),
-        child: Row(
+        child: Column(
           children: <Widget>[
-            Image(
-              width: 150.0,
-              image: NetworkImage(video.thumbnailUrl),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Container(
+                width: 250,
+                child: Image.network(
+                  video.thumbnailUrl,
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
             SizedBox(width: 10.0),
-            Expanded(
-              child: Text(
-                video.title,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 18.0,
-                ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      height: 40,
+                      width: 40,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.grey[300],
+                      ),
+                    ),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: 200,
+                        child: Text(
+                          video.title,
+                          textDirection: TextDirection.ltr,
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          maxLines: 2,
+                        ),
+                      ),
+                      Text("Views . Upload Date")
+                    ],
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.more_vert),
+                    onPressed: () {},
+                  ),
+                ],
               ),
             ),
           ],
@@ -139,9 +178,6 @@ class _ExplorePageState extends State<ExplorePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('YouTube Channel'),
-      ),
       // ignore: unnecessary_null_comparison
       body: _channel != null
           ? NotificationListener<ScrollNotification>(
@@ -154,14 +190,38 @@ class _ExplorePageState extends State<ExplorePage> {
                 }
                 return false;
               },
-              child: ListView.builder(
+              // child: ListView.builder(
+              //   itemCount: 1 + _channel.videos.length,
+              //   itemBuilder: (BuildContext context, int index) {
+              //     if (index == 0) {
+              //       return _buildProfileInfo();
+              //     }
+              //     Video video = _channel.videos[index - 1];
+              //     return _buildVideo(video);
+              //   },
+              // ),
+              child: GridView.builder(
                 itemCount: 1 + _channel.videos.length,
+                // itemCount: 30,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 5,
+                  childAspectRatio: 6 / 5,
+                ),
                 itemBuilder: (BuildContext context, int index) {
                   if (index == 0) {
                     return _buildProfileInfo();
                   }
                   Video video = _channel.videos[index - 1];
-                  return _buildVideo(video);
+                  return Padding(
+                    padding: const EdgeInsets.all(5),
+                    child: _buildVideo(video),
+                    // child: Container(
+                    //   height: 200,
+                    //   color: Colors.grey,
+                    //   child: Text("Hello"),
+                    // ),
+                  );
+                  // }
                 },
               ),
             )
