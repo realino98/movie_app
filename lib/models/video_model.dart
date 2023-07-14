@@ -4,6 +4,7 @@ class Video {
   final String thumbnailUrl;
   final String channelTitle;
   final String publishedAt;
+  final String channelId;
   // final String viewCount;
 
   Video({
@@ -12,6 +13,7 @@ class Video {
     required this.thumbnailUrl,
     required this.channelTitle,
     required this.publishedAt,
+    required this.channelId,
     // required this.viewCount,
   });
 
@@ -22,6 +24,7 @@ class Video {
       thumbnailUrl: snippet['thumbnails']['high']['url'],
       channelTitle: snippet['channelTitle'],
       publishedAt: snippet['publishedAt'],
+      channelId: snippet['channelId'],
       // viewCount: snippet[''],
     );
   }

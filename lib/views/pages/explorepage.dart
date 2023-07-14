@@ -123,34 +123,32 @@ class _ExplorePageState extends State<ExplorePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      height: 40,
-                      width: 40,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.grey[300],
-                      ),
-                    ),
+                  //Channel Image
+                  CircleAvatar(
+                    backgroundColor: Colors.white,
+                    radius: 25.0,
+                    backgroundImage: NetworkImage(_channel.profilePictureUrl),
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        width: 250,
-                        child: Text(
-                          video.title,
-                          textDirection: TextDirection.ltr,
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
+                  SizedBox(width: 12.0),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: 250,
+                          child: Text(
+                            video.title,
+                            textDirection: TextDirection.ltr,
+                            style: TextStyle(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            maxLines: 2,
                           ),
-                          maxLines: 2,
                         ),
-                      ),
-                      Text('views. ${video.publishedAt}')
-                    ],
+                        Text('${video.channelId} . ${video.publishedAt}')
+                      ],
+                    ),
                   ),
                   IconButton(
                     icon: Icon(Icons.more_vert),
@@ -202,7 +200,7 @@ class _ExplorePageState extends State<ExplorePage> {
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
-                        childAspectRatio: 1.1,
+                        childAspectRatio: 1,
                       ),
                       itemBuilder: (BuildContext context, int index) {
                         // if (index == 0) {
@@ -211,7 +209,7 @@ class _ExplorePageState extends State<ExplorePage> {
                         Video video = _channel.videos[index];
                         return Padding(
                           child: _buildVideo(video),
-                          padding: const EdgeInsets.all(5),
+                          padding: const EdgeInsets.all(1),
                         );
                         // }
                       },
