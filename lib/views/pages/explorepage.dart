@@ -90,29 +90,41 @@ class _ExplorePageState extends State<ExplorePage> {
         ),
       ),
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
+        margin: EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
         padding: EdgeInsets.all(10.0),
         height: 140.0,
         decoration: BoxDecoration(
           color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black12,
-              offset: Offset(0, 1),
-              blurRadius: 6.0,
-            ),
-          ],
+          // boxShadow: [
+          //   BoxShadow(
+          //     color: Colors.black12,
+          //     offset: Offset(0, 1),
+          //     blurRadius: 6.0,
+          //   ),
+          // ],
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            ClipRRect(
-              borderRadius: BorderRadius.circular(5),
-              child: Container(
-                width: double.infinity,
-                child: Image.network(
-                  video.thumbnailUrl,
-                  fit: BoxFit.cover,
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black12,
+                    offset: Offset(0, 1),
+                    blurRadius: 6.0,
+                  ),
+                ],
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(5),
+                child: Container(
+                  width: double.infinity,
+                  child: Image.network(
+                    video.thumbnailUrl,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
@@ -200,7 +212,7 @@ class _ExplorePageState extends State<ExplorePage> {
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
-                        childAspectRatio: 1,
+                        childAspectRatio: 9 / 9,
                       ),
                       itemBuilder: (BuildContext context, int index) {
                         // if (index == 0) {

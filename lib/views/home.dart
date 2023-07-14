@@ -51,8 +51,8 @@ class _HomeState extends State<Home> {
               ),
             ),
             ListTile(
-              leading: Icon(Icons.dashboard),
-              title: Text("Dashboard"),
+              leading: Icon(Icons.movie),
+              title: Text("Movies"),
               onTap: () {
                 setState(() {
                   selectedIndex = 0;
@@ -60,8 +60,8 @@ class _HomeState extends State<Home> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.explore),
-              title: Text("Explore"),
+              leading: Icon(Icons.youtube_searched_for_rounded),
+              title: Text("Youtube"),
               onTap: () {
                 setState(() {
                   selectedIndex = 1;
@@ -113,12 +113,21 @@ class _HomeState extends State<Home> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Icon(Icons.notifications),
+                IconButton(
+                  icon: Icon(Icons.notifications),
+                  onPressed: () {},
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Icon(Icons.menu),
+                  child: IconButton(
+                    icon: Icon(Icons.menu),
+                    onPressed: () {},
+                  ),
                 ),
-                Icon(Icons.person),
+                IconButton(
+                  icon: Icon(Icons.person),
+                  onPressed: () {},
+                ),
               ],
             )
           ],
