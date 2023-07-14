@@ -38,6 +38,7 @@ class APIService {
       channel.videos = await fetchVideosFromPlaylist(
         playlistId: channel.uploadPlaylistId,
       );
+      print(json.decode(response.body));
       return channel;
     } else {
       throw json.decode(response.body)['error']['message'];
@@ -48,7 +49,7 @@ class APIService {
     Map<String, String> parameters = {
       'part': 'snippet',
       'playlistId': playlistId ?? "",
-      'maxResults': '8',
+      'maxResults': '12',
       'pageToken': _nextPageToken,
       'key': API_KEY,
     };

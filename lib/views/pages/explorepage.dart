@@ -104,11 +104,12 @@ class _ExplorePageState extends State<ExplorePage> {
           ],
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             ClipRRect(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(5),
               child: Container(
-                width: 250,
+                width: double.infinity,
                 child: Image.network(
                   video.thumbnailUrl,
                   fit: BoxFit.cover,
@@ -137,7 +138,7 @@ class _ExplorePageState extends State<ExplorePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        width: 200,
+                        width: 250,
                         child: Text(
                           video.title,
                           textDirection: TextDirection.ltr,
@@ -148,7 +149,7 @@ class _ExplorePageState extends State<ExplorePage> {
                           maxLines: 2,
                         ),
                       ),
-                      Text("Views . Upload Date")
+                      Text('views. ${video.publishedAt}')
                     ],
                   ),
                   IconButton(
@@ -180,50 +181,44 @@ class _ExplorePageState extends State<ExplorePage> {
     return Scaffold(
       // ignore: unnecessary_null_comparison
       body: _channel != null
-          ? NotificationListener<ScrollNotification>(
-              onNotification: (ScrollNotification scrollDetails) {
-                if (!_isLoading &&
-                    _channel.videos.length != int.parse(_channel.videoCount) &&
-                    scrollDetails.metrics.pixels ==
-                        scrollDetails.metrics.maxScrollExtent) {
-                  _loadMoreVideos();
-                }
-                return false;
-              },
-              // child: ListView.builder(
-              //   itemCount: 1 + _channel.videos.length,
-              //   itemBuilder: (BuildContext context, int index) {
-              //     if (index == 0) {
-              //       return _buildProfileInfo();
-              //     }
-              //     Video video = _channel.videos[index - 1];
-              //     return _buildVideo(video);
-              //   },
-              // ),
-              child: GridView.builder(
-                itemCount: 1 + _channel.videos.length,
-                // itemCount: 30,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 5,
-                  childAspectRatio: 6 / 5,
+          ? Column(
+              children: [
+                _buildProfileInfo(),
+                Expanded(
+                  child: NotificationListener<ScrollNotification>(
+                    onNotification: (ScrollNotification scrollDetails) {
+                      if (!_isLoading &&
+                          _channel.videos.length !=
+                              int.parse(_channel.videoCount) &&
+                          scrollDetails.metrics.pixels ==
+                              scrollDetails.metrics.maxScrollExtent) {
+                        _loadMoreVideos();
+                      }
+                      return false;
+                    },
+                    child: GridView.builder(
+                      itemCount: _channel.videos.length,
+                      // itemCount: 30,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        childAspectRatio: 1.1,
+                      ),
+                      itemBuilder: (BuildContext context, int index) {
+                        // if (index == 0) {
+                        //   return _buildProfileInfo();
+                        // }
+                        Video video = _channel.videos[index];
+                        return Padding(
+                          child: _buildVideo(video),
+                          padding: const EdgeInsets.all(5),
+                        );
+                        // }
+                      },
+                    ),
+                  ),
                 ),
-                itemBuilder: (BuildContext context, int index) {
-                  if (index == 0) {
-                    return _buildProfileInfo();
-                  }
-                  Video video = _channel.videos[index - 1];
-                  return Padding(
-                    padding: const EdgeInsets.all(5),
-                    child: _buildVideo(video),
-                    // child: Container(
-                    //   height: 200,
-                    //   color: Colors.grey,
-                    //   child: Text("Hello"),
-                    // ),
-                  );
-                  // }
-                },
-              ),
+              ],
             )
           : Center(
               child: CircularProgressIndicator(
