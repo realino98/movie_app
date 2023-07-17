@@ -98,7 +98,7 @@ class _VideoScreenState extends State<VideoScreen> {
                             child: Row(
                               children: [
                                 Icon(Icons.thumb_up),
-                                Text("25K"),
+                                Text("124K"),
                               ],
                             ),
                           ),
@@ -119,8 +119,46 @@ class _VideoScreenState extends State<VideoScreen> {
             ),
             Expanded(
               flex: 1,
-              child: Center(
-                child: Text("Video List"),
+              child: ListView.builder(
+                itemCount: 20,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              height: 90,
+                              width: 160,
+                              color: Colors.grey,
+                            ),
+                            SizedBox(
+                              width: 8,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Title",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                Text("Username"),
+                                Text("Views . Uploaded"),
+                              ],
+                            ),
+                          ],
+                        ),
+                        Icon(Icons.more_vert),
+                      ],
+                    ),
+                  );
+                },
               ),
             ),
           ],
