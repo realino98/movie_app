@@ -29,26 +29,102 @@ class _VideoScreenState extends State<VideoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            flex: 2,
-            child: YoutubePlayer(
-              controller: _controller,
-              showVideoProgressIndicator: true,
-              onReady: () {
-                print('Player is ready.');
-              },
+      body: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              flex: 2,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  YoutubePlayer(
+                    controller: _controller,
+                    showVideoProgressIndicator: true,
+                    onReady: () {
+                      print('Player is ready.');
+                    },
+                  ),
+                  Text(
+                    widget.id,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: Colors.grey,
+                            radius: 24.0,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    Text("Username"),
+                                    Icon(
+                                      Icons.verified,
+                                    ),
+                                  ],
+                                ),
+                                Text("2400 Subscribers"),
+                              ],
+                            ),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {},
+                            child: Row(
+                              children: [
+                                Icon(Icons.notifications),
+                                Text("Subscribe"),
+                                Icon(Icons.arrow_downward),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          ElevatedButton(
+                            onPressed: () {},
+                            child: Row(
+                              children: [
+                                Icon(Icons.thumb_up),
+                                Text("25K"),
+                              ],
+                            ),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {},
+                            child: Icon(Icons.thumb_down),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {},
+                            child: Icon(Icons.share),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Center(
-              child: Text("Video List"),
+            Expanded(
+              flex: 1,
+              child: Center(
+                child: Text("Video List"),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
