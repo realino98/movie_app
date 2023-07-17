@@ -151,11 +151,12 @@ class _ExplorePageState extends State<ExplorePage> {
                           child: Text(
                             video.title,
                             textDirection: TextDirection.ltr,
+                            overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               fontSize: 18.0,
                               fontWeight: FontWeight.bold,
                             ),
-                            maxLines: 2,
+                            maxLines: 1,
                           ),
                         ),
                         Text('${video.channelId} . ${video.publishedAt}')
